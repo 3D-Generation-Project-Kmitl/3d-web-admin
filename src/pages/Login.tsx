@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader";
+import useAuth from "../hooks/useAuth";
 
 function Login() {
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { onAdminLogin, loading, message } = useAuth();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    //setUser({ username, role: "admin" });
-    navigate("/");
+    onAdminLogin(email, password);
   };
   return (
     <div className="relative flex flex-col justify-center min-h-full overflow-hidden">
@@ -49,14 +49,23 @@ function Login() {
             />
           </div>
           <div className="mt-6">
-            <button
-              type="submit"
-              className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight"
-            >
-              เข้าสู่ระบบ
-            </button>
+            {loading ? (
+              <Loader />
+            ) : (
+              <button
+                type="submit"
+                className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight"
+              >
+                เข้าสู่ระบบ
+              </button>
+            )}
           </div>
         </form>
+        <div>
+          {message && (
+            <div className="mt-4 text-sm text-red-600">{message}</div>
+          )}
+        </div>
       </div>
     </div>
   );
