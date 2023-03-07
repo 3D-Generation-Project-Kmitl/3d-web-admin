@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import httpClient from "../utils/httpClient";
 import UserContext from "../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const useAuth = () => {
+    const navigate = useNavigate();
     const [message, setMessage] = useState("");
     const [loading, setLoading] = useState(false);
     const { setUser } = useContext(UserContext);
@@ -27,6 +29,7 @@ const useAuth = () => {
         return httpClient.post("/auth/adminLogin", { email, password }).then((res) => {
             if (res.data.data) {
                 setUser(res.data.data);
+                navigate("/");
             }
             setLoading(false);
             return res.data;
@@ -39,6 +42,7 @@ const useAuth = () => {
     function onLogout() {
         return httpClient.post("/auth/logout").then((res) => {
             setUser(null);
+            navigate("/login");
             return res.data;
         }).catch((error) => {
             errorHandler(error);
