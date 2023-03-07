@@ -11,32 +11,33 @@ import {
 } from "react-icons/md";
 import { FaUserAlt, FaMoneyCheckAlt } from "react-icons/fa";
 function SideBar() {
+  const iconSize = 20;
   const [open, setOpen] = useState(true);
   const Menus = [
     { title: "แดชบอร์ด", icon: <MdSpaceDashboard size={20} />, to: "/" },
     {
       title: "จัดการการยืนยันตัวตน",
-      icon: <MdVerifiedUser size={20} />,
+      icon: <MdVerifiedUser size={iconSize} />,
       to: "/verify",
     },
     {
       title: "จัดการบัญชีผู้ใช้",
-      icon: <FaUserAlt size={20} />,
+      icon: <FaUserAlt size={iconSize} />,
       to: "/user",
     },
     {
       title: "คำขอถอนเงิน",
-      icon: <FaMoneyCheckAlt size={20} />,
+      icon: <FaMoneyCheckAlt size={iconSize} />,
       to: "/withdraw",
     },
     {
       title: "จัดการรายงาน",
-      icon: <MdReport size={20} />,
+      icon: <MdReport size={iconSize} />,
       to: "/report",
     },
     {
       title: "จัดการสินค้า",
-      icon: <MdShoppingCart size={20} />,
+      icon: <MdShoppingCart size={iconSize} />,
       to: "/product",
     },
   ];
@@ -48,7 +49,7 @@ function SideBar() {
       } bg-white h-screen p-5  pt-8 relative duration-300`}
     >
       <div
-        className={`absolute flex justify-center bg-primary cursor-pointer -right-3 top-9 border-gray-200
+        className={`absolute bg-primary cursor-pointer -right-3 top-5 border-gray-200
              border-2 rounded-full p-1 ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
       >
@@ -90,7 +91,7 @@ function SideBar() {
         ))}
       </ul>
       <div className="absolute flex bottom-3 my-3 rounded-md px-2 py-3 cursor-pointer hover:bg-lightWhite text-black text-sm items-center gap-x-4">
-        <BiLogOut size={20} className="text-primary" />
+        <BiLogOut size={iconSize} className="text-primary" />
         <span
           className={`${
             !open && "hidden"
