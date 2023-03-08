@@ -60,9 +60,7 @@ function SideBar() {
         <img
           alt="logo"
           src={logo}
-          className={`cursor-pointer duration-500 w-10 ${
-            open && "rotate-[360deg]"
-          }`}
+          className={`duration-500 w-10 ${open && "rotate-[360deg]"}`}
         />
         <h1
           className={`text-primary origin-left font-medium text-2xl duration-200 
