@@ -20,7 +20,7 @@ function TransactionItem({ transaction }: { transaction: Transaction }) {
             {transaction.type === "WITHDRAW" ? "ถอนเงิน" : "คำสั่งซื้อ"}
           </p>
           <p className="text-xs text-gray-600">
-            {dateFormat(transaction.createdAt, "hh:MM")}
+            {dateFormat(transaction.createdAt, "HH:MM")}
           </p>
         </div>
       </div>
