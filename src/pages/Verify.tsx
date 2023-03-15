@@ -2,21 +2,50 @@ import React, { useState } from "react";
 import UserCard from "../components/UserCard";
 import { useGetPendingIdentity, useUpdateIdentity } from "../hooks/useIdentity";
 import { Identity } from "../types/identity";
+import { AiOutlineSearch } from "react-icons/ai";
 
 function Verify() {
   const { data: pendingIdentity } = useGetPendingIdentity();
+  const [search, setSearch] = useState("");
+
+  function filterIdentity() {
+    if (pendingIdentity) {
+      return pendingIdentity.filter((identity) => {
+        const name = identity.firstName + " " + identity.lastName;
+        return (
+          name.toLowerCase().includes(search.toLowerCase()) ||
+          identity.idCardNumber.toLowerCase().includes(search.toLowerCase())
+        );
+      });
+    }
+  }
 
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
-      {pendingIdentity?.map((identity) => (
-        <VerifyModal key={identity.userId} identity={identity}>
-          <UserCard
-            picture={identity.cardFacePicture}
-            name={identity.firstName + " " + identity.lastName}
-            dateTime={identity.updatedAt}
+    <div className="relative">
+      <div className="fixed w-full bg-gray-100 pt-3 pb-2">
+        <div className="flex items-center w-80 h-9">
+          <AiOutlineSearch className="ml-3 w-5 h-5 absolute" color="gray" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            placeholder="ค้นหา"
+            type="text"
+            className="pl-10 h-full w-full bg-gray-300 border rounded-2xl focus:border-gray-200 focus:ring-gray-100 focus:outline-none focus:ring focus:ring-opacity-40"
           />
-        </VerifyModal>
-      ))}
+        </div>
+      </div>
+      <div className="h-14"></div>
+      <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
+        {filterIdentity()?.map((identity) => (
+          <VerifyModal key={identity.userId} identity={identity}>
+            <UserCard
+              picture={identity.cardFacePicture}
+              name={identity.firstName + " " + identity.lastName}
+              dateTime={identity.updatedAt}
+            />
+          </VerifyModal>
+        ))}
+      </div>
     </div>
   );
 }

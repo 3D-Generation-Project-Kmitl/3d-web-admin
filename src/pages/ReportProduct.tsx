@@ -2,24 +2,50 @@ import React, { useState } from "react";
 import UserCard from "../components/UserCard";
 import { useGetReports, useCloseReport } from "../hooks/useReport";
 import { Report } from "../types/report";
-
+import { AiOutlineSearch } from "react-icons/ai";
 function ReportProduct() {
   const { data: reports } = useGetReports();
+  const [search, setSearch] = useState("");
+
+  function filterReport() {
+    return reports?.filter(
+      (report) =>
+        report.detail.toLowerCase().includes(search.toLowerCase()) ||
+        report.User.name.toLowerCase().includes(search.toLowerCase()) ||
+        report.Product.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
-      {reports?.map((report) => (
-        <ReportProductModal
-          key={report.userId + report.productId}
-          report={report}
-        >
-          <UserCard
-            picture={report.User.picture}
-            name={report.User.name}
-            description={report.detail.slice(0, 25) + "..."}
-            dateTime={report.updatedAt}
+    <div className="relative">
+      <div className="fixed w-full bg-gray-100 pt-3 pb-2">
+        <div className="flex items-center w-80 h-9">
+          <AiOutlineSearch className="ml-3 w-5 h-5 absolute" color="gray" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            placeholder="ค้นหา"
+            type="text"
+            className="pl-10 h-full w-full bg-gray-300 border rounded-2xl focus:border-gray-200 focus:ring-gray-100 focus:outline-none focus:ring focus:ring-opacity-40"
           />
-        </ReportProductModal>
-      ))}
+        </div>
+      </div>
+      <div className="h-14"></div>
+      <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
+        {filterReport()?.map((report) => (
+          <ReportProductModal
+            key={report.userId + report.productId}
+            report={report}
+          >
+            <UserCard
+              picture={report.User.picture}
+              name={report.User.name}
+              description={report.detail.slice(0, 25) + "..."}
+              dateTime={report.updatedAt}
+            />
+          </ReportProductModal>
+        ))}
+      </div>
     </div>
   );
 }

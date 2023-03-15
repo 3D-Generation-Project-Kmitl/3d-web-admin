@@ -6,28 +6,54 @@ import {
   useRejectWithdrawTransaction,
 } from "../hooks/useWallet";
 import { WithdrawTransaction } from "../types/withdrawTransaction";
+import { AiOutlineSearch } from "react-icons/ai";
 
 function Withdraw() {
   const { data: transactions } = useGetWithdrawTransaction();
+  const [search, setSearch] = useState("");
+
+  function filterTransaction() {
+    return transactions?.filter((transaction) =>
+      transaction.User.Identity.firstName
+        .toLowerCase()
+        .includes(search.toLowerCase())
+    );
+  }
+
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
-      {transactions?.map((transaction) => (
-        <WithdrawModal
-          key={transaction.walletTransactionId}
-          transaction={transaction}
-        >
-          <UserCard
-            picture={transaction.User.picture}
-            name={
-              transaction.User.Identity.firstName +
-              " " +
-              transaction.User.Identity.lastName
-            }
-            amountMoney={transaction.amountMoney}
-            dateTime={transaction.updatedAt}
+    <div className="relative">
+      <div className="fixed w-full bg-gray-100 pt-3 pb-2">
+        <div className="flex items-center w-80 h-9">
+          <AiOutlineSearch className="ml-3 w-5 h-5 absolute" color="gray" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            placeholder="ค้นหา"
+            type="text"
+            className="pl-10 h-full w-full bg-gray-300 border rounded-2xl focus:border-gray-200 focus:ring-gray-100 focus:outline-none focus:ring focus:ring-opacity-40"
           />
-        </WithdrawModal>
-      ))}
+        </div>
+      </div>
+      <div className="h-14"></div>
+      <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
+        {filterTransaction()?.map((transaction) => (
+          <WithdrawModal
+            key={transaction.walletTransactionId}
+            transaction={transaction}
+          >
+            <UserCard
+              picture={transaction.User.picture}
+              name={
+                transaction.User.Identity.firstName +
+                " " +
+                transaction.User.Identity.lastName
+              }
+              amountMoney={transaction.amountMoney}
+              dateTime={transaction.updatedAt}
+            />
+          </WithdrawModal>
+        ))}
+      </div>
     </div>
   );
 }

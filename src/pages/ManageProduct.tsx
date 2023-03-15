@@ -2,20 +2,44 @@ import React, { useState } from "react";
 import UserCard from "../components/UserCard";
 import { useGetProducts, useUpdateStatusProduct } from "../hooks/useProduct";
 import { Product } from "../types/product";
+import { AiOutlineSearch } from "react-icons/ai";
 
 function ManageProduct() {
   const { data: products } = useGetProducts();
+  const [search, setSearch] = useState("");
+
+  function filterProduct() {
+    return products?.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+
   return (
-    <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
-      {products?.map((product) => (
-        <ManageProductModal key={product.productId} product={product}>
-          <UserCard
-            picture={product.Model.picture}
-            name={product.name}
-            description={product.User.name}
+    <div className="relative">
+      <div className="fixed w-full bg-gray-100 pt-3 pb-2">
+        <div className="flex items-center w-80 h-9">
+          <AiOutlineSearch className="ml-3 w-5 h-5 absolute" color="gray" />
+          <input
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
+            placeholder="ค้นหา"
+            type="text"
+            className="pl-10 h-full w-full bg-gray-300 border rounded-2xl focus:border-gray-200 focus:ring-gray-100 focus:outline-none focus:ring focus:ring-opacity-40"
           />
-        </ManageProductModal>
-      ))}
+        </div>
+      </div>
+      <div className="h-14"></div>
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
+        {filterProduct()?.map((product) => (
+          <ManageProductModal key={product.productId} product={product}>
+            <UserCard
+              picture={product.Model.picture}
+              name={product.name}
+              description={product.User.name}
+            />
+          </ManageProductModal>
+        ))}
+      </div>
     </div>
   );
 }

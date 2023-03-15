@@ -17,7 +17,7 @@ function AuthRoute() {
   return (
     <div className="flex">
       <SideBar />
-      <div className="h-screen flex-1 p-5 bg-gray-100 overflow-auto">
+      <div className="h-screen flex-1 pl-5 pb-5 pr-5 bg-gray-100 overflow-auto">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/verify" element={<Verify />} />
