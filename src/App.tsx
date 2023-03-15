@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import Verify from "./pages/Verify";
 import Withdraw from "./pages/Withdraw";
 import ManageUser from "./pages/ManageUser";
-import Report from "./pages/Report";
+import Report from "./pages/ReportProduct";
 import Product from "./pages/Product";
 import SideBar from "./components/SideBar";
 import { useEffect, useState } from "react";
