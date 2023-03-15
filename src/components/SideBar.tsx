@@ -10,9 +10,12 @@ import {
   MdShoppingCart,
 } from "react-icons/md";
 import { FaUserAlt, FaMoneyCheckAlt } from "react-icons/fa";
+import useAuth from "../hooks/useAuth";
+
 function SideBar() {
   const iconSize = 20;
   const [open, setOpen] = useState(true);
+  const { onLogout } = useAuth();
   const Menus = [
     { title: "แดชบอร์ด", icon: <MdSpaceDashboard size={20} />, to: "/" },
     {
@@ -77,7 +80,7 @@ function SideBar() {
             key={index}
             className={({ isActive }) =>
               `flex my-3 rounded-md px-2 py-3 cursor-pointer hover:bg-lightWhite text-black text-sm items-center gap-x-4 ${
-                isActive && "shadow-sm font-semibold"
+                isActive && "shadow-sm bg-gray-100 font-semibold"
               } `
             }
           >
@@ -88,7 +91,10 @@ function SideBar() {
           </Link>
         ))}
       </ul>
-      <div className="absolute flex bottom-3 my-3 rounded-md px-2 py-3 cursor-pointer hover:bg-lightWhite text-black text-sm items-center gap-x-4">
+      <div
+        onClick={onLogout}
+        className="absolute flex bottom-3 my-3 rounded-md px-2 py-3 cursor-pointer hover:bg-lightWhite text-black text-sm items-center gap-x-4"
+      >
         <BiLogOut size={iconSize} className="text-primary" />
         <span
           className={`${

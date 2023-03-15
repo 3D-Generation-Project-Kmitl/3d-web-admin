@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import UserCard from "../components/UserCard";
 import {
   useGetWithdrawTransaction,
@@ -10,7 +10,7 @@ import { WithdrawTransaction } from "../types/withdrawTransaction";
 function Withdraw() {
   const { data: transactions } = useGetWithdrawTransaction();
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
       {transactions?.map((transaction) => (
         <WithdrawModal
           key={transaction.walletTransactionId}
@@ -41,7 +41,6 @@ function WithdrawModal({
 }) {
   const [show, setShow] = useState(false);
   const [evidence, setEvidence] = useState<File | null>(null);
-  const [preview, setPreview] = useState<String | null>(null);
   const { mutateAsync: acceptWithdrawTransaction } =
     useAcceptWithdrawTransaction();
   const { mutateAsync: rejectWithdrawTransaction } =

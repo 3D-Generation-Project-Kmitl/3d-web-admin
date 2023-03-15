@@ -7,7 +7,7 @@ function Verify() {
   const { data: pendingIdentity } = useGetPendingIdentity();
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 xl:grid-cols-4  gap-4">
       {pendingIdentity?.map((identity) => (
         <VerifyModal key={identity.userId} identity={identity}>
           <UserCard

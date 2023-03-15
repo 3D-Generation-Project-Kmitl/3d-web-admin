@@ -7,7 +7,7 @@ import { useBanUser, useUnBanUser } from "../hooks/useUser";
 function ManageUser() {
   const { data: users } = useGetUsers();
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
       {users?.map((user) => (
         <UserModal key={user.userId} user={user}>
           <UserCard
