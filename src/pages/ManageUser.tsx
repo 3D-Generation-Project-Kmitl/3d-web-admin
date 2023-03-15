@@ -7,7 +7,7 @@ import { useBanUser, useUnBanUser } from "../hooks/useUser";
 function ManageUser() {
   const { data: users } = useGetUsers();
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
       {users?.map((user) => (
         <UserModal key={user.userId} user={user}>
           <UserCard
@@ -112,7 +112,7 @@ function UserModal({
                             onClick={
                               user.isBan ? handelUnBanUser : handelBanUser
                             }
-                            className={`w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform  rounded-md ${
+                            className={`font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform  rounded-md ${
                               user.isBan ? "bg-green-500" : "bg-red-500"
                             }`}
                           >

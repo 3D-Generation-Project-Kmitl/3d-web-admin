@@ -24,7 +24,7 @@ function UserCard({
       <div className="flex flex-col gap-2">
         <h3>{name}</h3>
         {amountMoney && (
-          <p className="text-xs text-gray-600">
+          <p className="text-xs font-semibold text-black">
             {Intl.NumberFormat("th-TH", {
               style: "currency",
               currency: "THB",
