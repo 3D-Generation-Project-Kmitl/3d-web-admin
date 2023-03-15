@@ -128,13 +128,13 @@ function VerifyModal({
                         <div className="flex flex-row gap-4 pb-2 mt-5">
                           <button
                             onClick={onApprove}
-                            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight"
+                            className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight"
                           >
                             ยืนยัน
                           </button>
                           <button
                             onClick={onReject}
-                            className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-secondary rounded-md hover:bg-secondaryLight focus:outline-none focus:bg-secondaryLight"
+                            className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-secondary rounded-md hover:bg-secondaryLight focus:outline-none focus:bg-secondaryLight"
                           >
                             ปฏิเสธ
                           </button>
