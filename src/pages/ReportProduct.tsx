@@ -15,6 +15,7 @@ function ReportProduct() {
           <UserCard
             picture={report.User.picture}
             name={report.User.name}
+            description={report.detail.slice(0, 25) + "..."}
             dateTime={report.updatedAt}
           />
         </ReportProductModal>
