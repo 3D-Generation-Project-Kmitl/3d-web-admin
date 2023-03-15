@@ -121,7 +121,7 @@ function WithdrawModal({
                     <p className="font-semibold">หลักฐานการโอนเงิน</p>
                     {evidence && (
                       <img
-                        className="h-48 object-cover"
+                        className="h-48 object-cover rounded-md"
                         src={URL.createObjectURL(evidence)}
                         alt="evidence"
                       />
