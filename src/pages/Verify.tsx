@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Modal from "../components/Modal";
 import UserCard from "../components/UserCard";
 import { useGetPendingIdentity, useUpdateIdentity } from "../hooks/useIdentity";
 import { Identity } from "../types/identity";
@@ -10,15 +9,13 @@ function Verify() {
   return (
     <div className="grid grid-cols-4 gap-4">
       {pendingIdentity?.map((identity) => (
-        <div key={identity.userId} className="w-full">
-          <VerifyModal identity={identity}>
-            <UserCard
-              picture={identity.cardFacePicture}
-              name={identity.firstName + " " + identity.lastName}
-              dateTime={identity.updatedAt}
-            />
-          </VerifyModal>
-        </div>
+        <VerifyModal key={identity.userId} identity={identity}>
+          <UserCard
+            picture={identity.cardFacePicture}
+            name={identity.firstName + " " + identity.lastName}
+            dateTime={identity.updatedAt}
+          />
+        </VerifyModal>
       ))}
     </div>
   );
