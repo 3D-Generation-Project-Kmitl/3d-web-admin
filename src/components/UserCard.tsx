@@ -5,12 +5,14 @@ function UserCard({
   picture,
   name,
   email,
+  description,
   amountMoney,
   dateTime,
 }: {
   picture: string;
   name: string;
   email?: string;
+  description?: string;
   amountMoney?: number;
   dateTime?: Date;
 }) {
@@ -23,6 +25,7 @@ function UserCard({
       />
       <div className="flex flex-col gap-2">
         <h3>{name}</h3>
+        {description && <p className="text-xs text-gray-600">{description}</p>}
         {amountMoney && (
           <p className="text-xs font-semibold text-black">
             {Intl.NumberFormat("th-TH", {
