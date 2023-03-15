@@ -4,10 +4,14 @@ import dateFormat from "dateformat";
 function UserCard({
   picture,
   name,
+  email,
+  amountMoney,
   dateTime,
 }: {
   picture: string;
   name: string;
+  email?: string;
+  amountMoney?: number;
   dateTime?: Date;
 }) {
   return (
@@ -19,12 +23,23 @@ function UserCard({
       />
       <div className="flex flex-col gap-2">
         <h3>{name}</h3>
-        <p className="text-xs text-gray-600">
-          {dateTime &&
-            dateFormat(dateTime, "yyyy/mm/dd") +
+        {amountMoney && (
+          <p className="text-xs text-gray-600">
+            {Intl.NumberFormat("th-TH", {
+              style: "currency",
+              currency: "THB",
+              minimumFractionDigits: 0,
+            }).format(amountMoney)}
+          </p>
+        )}
+        {dateTime && (
+          <p className="text-xs text-gray-600">
+            {dateFormat(dateTime, "yyyy/mm/dd") +
               " " +
               dateFormat(dateTime, "HH:MM")}
-        </p>
+          </p>
+        )}
+        {email && <p className="text-xs text-gray-600">{email}</p>}
       </div>
     </div>
   );
