@@ -67,7 +67,6 @@ function ManageProductModal({
       productId: product.productId,
       status: status,
     });
-    closeModal();
   }
 
   return (

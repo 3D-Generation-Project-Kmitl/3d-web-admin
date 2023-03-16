@@ -66,14 +66,12 @@ function UserModal({
     banUser({
       userId: user.userId,
     });
-    closeModal();
   }
 
   function handelUnBanUser() {
     unBanUser({
       userId: user.userId,
     });
-    closeModal();
   }
 
   return (

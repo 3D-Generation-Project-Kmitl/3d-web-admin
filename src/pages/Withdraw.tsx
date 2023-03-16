@@ -7,6 +7,7 @@ import {
 } from "../hooks/useWallet";
 import { WithdrawTransaction } from "../types/withdrawTransaction";
 import { AiOutlineSearch } from "react-icons/ai";
+import ConfirmModal from "../components/ConfirmModal";
 
 function Withdraw() {
   const { data: transactions } = useGetWithdrawTransaction();
@@ -160,18 +161,22 @@ function WithdrawModal({
                     />
                     <div className="h-2"></div>
                     <div className="flex flex-row gap-4 pb-2 mt-5 w-full">
-                      <button
-                        onClick={handelAccept}
-                        className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight"
+                      <ConfirmModal
+                        title="ยืนยันการโอนเงินหรือไม่"
+                        onConfirm={handelAccept}
                       >
-                        โอนแล้ว
-                      </button>
-                      <button
-                        onClick={handelReject}
-                        className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-secondary rounded-md hover:bg-secondaryLight focus:outline-none focus:bg-secondaryLight"
+                        <button className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight">
+                          โอนแล้ว
+                        </button>
+                      </ConfirmModal>
+                      <ConfirmModal
+                        title="ปฏิเสธการถอนเงินหรือไม่"
+                        onConfirm={handelReject}
                       >
-                        ปฏิเสธ
-                      </button>
+                        <button className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-secondary rounded-md hover:bg-secondaryLight focus:outline-none focus:bg-secondaryLight">
+                          ปฏิเสธ
+                        </button>
+                      </ConfirmModal>
                     </div>
                   </div>
                 </div>

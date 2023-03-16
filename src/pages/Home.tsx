@@ -19,7 +19,7 @@ function Home() {
   const { data: categories } = useGetCategoryProduct();
 
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full pt-5">
       <div className="grid grid-cols-3 gap-5">
         <CountCard item={countUser} title="ผู้ใช้" icon={<FiUser />} />
         <CountCard item={countProduct} title="สินค้า" icon={<BsHandbag />} />

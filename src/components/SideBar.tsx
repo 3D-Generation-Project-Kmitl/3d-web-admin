@@ -11,6 +11,7 @@ import {
 } from "react-icons/md";
 import { FaUserAlt, FaMoneyCheckAlt } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
+import ConfirmModal from "./ConfirmModal";
 
 function SideBar() {
   const iconSize = 20;
@@ -52,7 +53,7 @@ function SideBar() {
       } bg-white h-screen p-5  pt-8 relative duration-300`}
     >
       <div
-        className={`absolute bg-primary cursor-pointer -right-3 top-5 border-gray-200
+        className={`absolute bg-primary cursor-pointer -right-3 top-4 border-gray-200
              border-2 rounded-full p-1 ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
       >
@@ -91,19 +92,21 @@ function SideBar() {
           </Link>
         ))}
       </ul>
-      <div
-        onClick={onLogout}
-        className="absolute flex bottom-3 my-3 rounded-md px-2 py-3 cursor-pointer hover:bg-lightWhite text-black text-sm items-center gap-x-4"
-      >
-        <BiLogOut size={iconSize} className="text-primary" />
-        <span
-          className={`${
-            !open && "hidden"
-          } origin-left duration-200 hover:text-primary`}
+      <ConfirmModal title="ต้องการออกจากระบบหรือไม่?" onConfirm={onLogout}>
+        <div
+          //onClick={onLogout}
+          className="absolute flex bottom-3 my-3 rounded-md px-2 py-3 cursor-pointer hover:bg-lightWhite text-black text-sm items-center gap-x-4"
         >
-          ออกจากระบบ
-        </span>
-      </div>
+          <BiLogOut size={iconSize} className="text-primary" />
+          <span
+            className={`${
+              !open && "hidden"
+            } origin-left duration-200 hover:text-primary`}
+          >
+            ออกจากระบบ
+          </span>
+        </div>
+      </ConfirmModal>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import UserCard from "../components/UserCard";
 import { useGetPendingIdentity, useUpdateIdentity } from "../hooks/useIdentity";
 import { Identity } from "../types/identity";
 import { AiOutlineSearch } from "react-icons/ai";
+import ConfirmModal from "../components/ConfirmModal";
 
 function Verify() {
   const { data: pendingIdentity } = useGetPendingIdentity();
@@ -155,18 +156,22 @@ function VerifyModal({
                           placeholder="ระบุหมายเหตุที่นี่"
                         />
                         <div className="flex flex-row gap-4 pb-2 mt-5">
-                          <button
-                            onClick={onApprove}
-                            className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight"
+                          <ConfirmModal
+                            title="อนุมัติการยืนยันตัวตนหรือไม่?"
+                            onConfirm={onApprove}
                           >
-                            ยืนยัน
-                          </button>
-                          <button
-                            onClick={onReject}
-                            className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-secondary rounded-md hover:bg-secondaryLight focus:outline-none focus:bg-secondaryLight"
+                            <button className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-primary rounded-md hover:bg-primaryLight focus:outline-none focus:bg-primaryLight">
+                              ยืนยัน
+                            </button>
+                          </ConfirmModal>
+                          <ConfirmModal
+                            title="ปฏิเสธการยืนยันตัวตนหรือไม่?"
+                            onConfirm={onReject}
                           >
-                            ปฏิเสธ
-                          </button>
+                            <button className="font-semibold w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-secondary rounded-md hover:bg-secondaryLight focus:outline-none focus:bg-secondaryLight">
+                              ปฏิเสธ
+                            </button>
+                          </ConfirmModal>
                         </div>
                       </div>
                     </div>
