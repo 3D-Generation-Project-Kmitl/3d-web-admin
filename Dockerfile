@@ -16,8 +16,6 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Expose port 3000
-EXPOSE 3000
-
-# Start the application
-CMD ["npm", "start"]
+# Serve the static files
+RUN npm install -g serve
+CMD ["serve", "-s", "build"]
