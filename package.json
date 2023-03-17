@@ -25,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "rebuild:be": "docker compose build web && docker compose rm --stop web && docker compose up -d web",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
