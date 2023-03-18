@@ -70,7 +70,7 @@ function SideBar() {
           className={`text-primary origin-left font-medium text-2xl duration-200 
           ${!open && "scale-0"}`}
         >
-          Marketplace
+          Modello
         </h1>
       </div>
 
